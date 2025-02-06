@@ -1,20 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import EstudiantesProvider from './Provider/EstudiantesProvider';
+import ListaEstudiantesComponents from './Components/ListaEstudiantesComponents';
+import { EstudiantesContext }  from './Context/EstudiantesContext';
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <EstudiantesProvider>
+        
+      </EstudiantesProvider>
     </View>
+
   );
-}
+};
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  studentItem: {
+    fontSize: 18,
+    padding: 10,
+    textAlign: 'center',
   },
 });
+
+export default App;
