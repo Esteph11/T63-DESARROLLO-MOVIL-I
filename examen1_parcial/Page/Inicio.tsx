@@ -1,43 +1,45 @@
 import React, { useEffect } from 'react';  
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';  
+import { View, Text, StyleSheet, FlatList, Button, Alert } from 'react-native';  
 import { useContextPedidos } from '../Provider/PedidosProvider';  
 import { useNavigation } from '@react-navigation/native';  
 
+type Pedidos = {  
+    id: number;  
+    nombre: string;  
+    precio: number;  
+};   
+
+const pedidosDisponible: Pedidos[] = [   
+    { id: 1, nombre: 'Plato 1', precio: 100 },  
+    { id: 2, nombre: 'Plato 2', precio: 150 },  
+    { id: 3, nombre: 'Plato 3', precio: 200 },  
+];  
+
 export default function Inicio() {  
     const navigation = useNavigation();  
-    const { getPedidos, agregarPedidos } = useContextPedidos();  
-    
-    const pedidosDatos = [  
-        { id: 1, nombre: 'Plato 1', precio: 100 },  
-        { id: 2, nombre: 'Plato 2', precio: 150 },  
-        { id: 3, nombre: 'Plato 3', precio: 200 },  
-    ];   
+    const { agregarPedidos, pedidos } = useContextPedidos();  // Obtén la función y el estado de pedidos  
 
-    useEffect(() => {  
-        getPedidos();  
-    }, []);   
-
-    const handleAgregarPedidos = (item) => {  
-        agregarPedidos(item);  
-        getPedidos();  
-    }; 
+    const handleAgregarPedidos = (pedidos: Pedidos) => {  
+        agregarPedidos(pedidos);  
+        Alert.alert('Pedido agregado', `${pedidos.nombre} ha sido agregado al pedido.`);  
+    };   
       
-
     return (  
         <View style={styles.container}>  
+            <Text style={styles.titulo}>Lista de Platos Disponibles</Text>  
             <FlatList  
-                data={pedidosDatos}   
+                data={pedidosDisponible}   
                 renderItem={({ item }) => (  
                     <View style={styles.pedidosContainer}>  
                         <Text style={styles.pedidos}>{item.nombre} - ${item.precio}</Text>  
-                        <Button title="Agregar Pedido" onPress={() => handleAgregarPedidos(item)} />  
+                        <Button title="Agregar al Pedido" onPress={() => handleAgregarPedidos(item)} />  
                     </View>  
                 )}  
                 keyExtractor={item => item.id.toString()}  
             />  
             <Button  
-                title="Realizar Pedido"  
-                onPress={() => navigation.navigate('Realizar Pedido')}  
+                title="Ir a Mis Pedidos"  
+                onPress={() => navigation.navigate('Ver Pedidos')}  // Asegúrate de que esta ruta esté definida  
             />  
         </View>  
     );  
@@ -48,6 +50,11 @@ const styles = StyleSheet.create({
         flex: 1,  
         padding: 20,  
         alignItems: 'center'  
+    },  
+    titulo: {  
+        fontSize: 24,  
+        fontWeight: 'bold',  
+        marginBottom: 20  
     },  
     pedidosContainer: {  
         width: '100%',  
