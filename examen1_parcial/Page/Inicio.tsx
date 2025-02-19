@@ -17,7 +17,7 @@ const pedidosDisponible: Pedidos[] = [
 
 export default function Inicio() {  
     const navigation = useNavigation();  
-    const { agregarPedidos, pedidos } = useContextPedidos();  // Obtén la función y el estado de pedidos  
+    const { agregarPedidos, pedidos } = useContextPedidos();  
 
     const handleAgregarPedidos = (pedidos: Pedidos) => {  
         agregarPedidos(pedidos);  
