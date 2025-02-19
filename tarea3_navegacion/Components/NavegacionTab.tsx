@@ -10,7 +10,7 @@ export default function NavegacionTab() {
   return (  
     <Tab.Navigator>  
       <Tab.Screen name='Home' component={Home}></Tab.Screen>  
-      <Tab.Screen name='AddTodo' component={AddTodo}></Tab.Screen>
+      <Tab.Screen name='Add Task' component={AddTodo}></Tab.Screen>
     </Tab.Navigator>  
   );  
 }  
