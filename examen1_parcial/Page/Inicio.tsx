@@ -39,7 +39,7 @@ export default function Inicio() {
             />  
             <Button  
                 title="Ir a Mis Pedidos"  
-                onPress={() => navigation.navigate('Ver Pedidos')}  // Asegúrate de que esta ruta esté definida  
+                onPress={() => navigation.navigate('Ver Pedidos')}
             />  
         </View>  
     );  
